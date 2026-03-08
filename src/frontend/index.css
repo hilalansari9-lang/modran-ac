@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Cabinet Grotesk — display/headings */
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/assets/fonts/CabinetGrotesk-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Satoshi — body/UI */
+@font-face {
+  font-family: "Satoshi";
+  src: url("/assets/fonts/Satoshi-Variable.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Geist Mono — temperature numerics */
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 1rem;
+
+    /* Deep slate-navy base */
+    --background: 0.14 0.012 255;
+    --foreground: 0.95 0.008 240;
+
+    /* Cards: slightly lighter with frosted glass feel */
+    --card: 0.18 0.014 255;
+    --card-foreground: 0.95 0.008 240;
+
+    /* Popovers */
+    --popover: 0.2 0.016 255;
+    --popover-foreground: 0.95 0.008 240;
+
+    /* Primary: electric cyan */
+    --primary: 0.72 0.16 200;
+    --primary-foreground: 0.1 0.012 255;
+
+    /* Secondary: soft slate */
+    --secondary: 0.24 0.016 255;
+    --secondary-foreground: 0.85 0.01 240;
+
+    /* Muted: subtle */
+    --muted: 0.22 0.014 255;
+    --muted-foreground: 0.55 0.01 240;
+
+    /* Accent: warmer cyan-teal */
+    --accent: 0.28 0.02 255;
+    --accent-foreground: 0.72 0.16 200;
+
+    /* Destructive: warm red */
+    --destructive: 0.62 0.22 25;
+    --destructive-foreground: 0.97 0.005 0;
+
+    /* Borders: subtle */
+    --border: 0.3 0.018 255;
+    --input: 0.26 0.016 255;
+    --ring: 0.72 0.16 200;
+
+    /* Status colors */
+    --online: 0.72 0.18 155;
+    --offline: 0.55 0.01 240;
+    --power-on: 0.72 0.16 200;
+    --heat: 0.72 0.2 40;
+    --cool: 0.72 0.16 200;
+    --fan: 0.65 0.12 260;
+    --dry: 0.72 0.18 80;
+    --auto: 0.7 0.15 300;
+
+    /* Charts */
+    --chart-1: 0.72 0.16 200;
+    --chart-2: 0.7 0.15 155;
+    --chart-3: 0.72 0.2 40;
+    --chart-4: 0.7 0.18 300;
+    --chart-5: 0.72 0.18 80;
+
+    /* Sidebar (not used but required) */
+    --sidebar: 0.16 0.013 255;
+    --sidebar-foreground: 0.95 0.008 240;
+    --sidebar-primary: 0.72 0.16 200;
+    --sidebar-primary-foreground: 0.1 0.012 255;
+    --sidebar-accent: 0.22 0.014 255;
+    --sidebar-accent-foreground: 0.85 0.01 240;
+    --sidebar-border: 0.3 0.018 255;
+    --sidebar-ring: 0.72 0.16 200;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Cabinet Grotesk", sans-serif;
+  }
+  .font-body {
+    font-family: "Satoshi", sans-serif;
+  }
+  .font-mono-temp {
+    font-family: "Geist Mono", monospace;
+  }
+
+  /* Glass card effect */
+  .glass-card {
+    background: oklch(var(--card) / 0.85);
+    backdrop-filter: blur(16px) saturate(1.2);
+    border: 1px solid oklch(var(--border) / 0.6);
+  }
+
+  /* Noise overlay */
+  .noise-bg {
+    position: relative;
+  }
+  .noise-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.08;
+    border-radius: inherit;
+  }
+
+  /* Power glow */
+  .power-glow {
+    box-shadow: 0 0 40px oklch(var(--primary) / 0.3), 0 0 80px oklch(var(--primary) / 0.15);
+  }
+
+  /* Subtle inset shadow for depth */
+  .inset-depth {
+    box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.06), 0 4px 24px oklch(0 0 0 / 0.35);
+  }
+}
